@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TCTcalc</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_about">О программе</string>
+    <string name="about_text">Программа для помощи в судействе соревнований по технике спортивного велосипедного туризма. Пересчитывает время дистанции с учетом штрафов</string>
+    <string name="button_ok">OK</string>
+</resources>
