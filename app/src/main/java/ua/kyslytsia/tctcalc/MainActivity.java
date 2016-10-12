@@ -2,26 +2,27 @@ package ua.kyslytsia.tctcalc;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import java.util.GregorianCalendar;
+import ua.kyslytsia.tctcalc.Fragments.FragmentPenalty;
+import ua.kyslytsia.tctcalc.Fragments.FragmentTime;
 
 public class MainActivity extends AppCompatActivity {
-    private static EditText inputMinutes;
-    private static EditText inputSeconds;
-    private static EditText inputMillis;
-    private static EditText inputDistancePenalty;
-    private static EditText penaltyCost;
-    private static GregorianCalendar gregorianCalendar;
 
-    private static TextView timeWithPenalty;
+    private SectionsPagerAdapter mSectionsPagerAdapter;
+    private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,15 +30,35 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        inputMinutes = (EditText) findViewById(R.id.inputMinutes);
-        inputSeconds = (EditText) findViewById(R.id.inputSeconds);
-        inputMillis = (EditText) findViewById(R.id.inputMillis);
-        inputDistancePenalty = (EditText) findViewById(R.id.inputDistancePenalty);
-        penaltyCost = (EditText) findViewById(R.id.penaltyCost);
-        timeWithPenalty = (TextView) findViewById(R.id.timeWithPenalty);
+        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
-        gregorianCalendar = new GregorianCalendar();
-        gregorianCalendar.clear();
+        // Set up the ViewPager with the sections adapter.
+        mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionsPagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
+                dialog.setTitle(R.string.action_about)
+                        .setMessage(R.string.about_text)
+                        .setCancelable(true)
+                        .setNegativeButton(R.string.button_ok, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = dialog.create();
+                alert.show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+            }
+        });
     }
 
     @Override
@@ -70,46 +91,46 @@ public class MainActivity extends AppCompatActivity {
             alert.show();
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
-    public void takeResult (View v) {
-        if (inputMinutes.getText().toString().isEmpty()) {
-            inputMinutes.setText("0");
+    public class SectionsPagerAdapter extends FragmentPagerAdapter {
+
+        public SectionsPagerAdapter(FragmentManager fm) {
+            super(fm);
         }
 
-        if (inputSeconds.getText().toString().isEmpty()) {
-            inputSeconds.setText("0");
+        @Override
+        public Fragment getItem(int position) {
+            // getItem is called to instantiate the fragment for the given page.
+            // Return a PlaceholderFragment (defined as a static inner class below).
+            switch (position) {
+                case 0: {
+                    return FragmentPenalty.newInstance();
+                }
+                case 1: {
+                    return FragmentTime.newInstance();
+                }
+
+            }
+            return null;
         }
 
-        if (inputMillis.getText().toString().isEmpty()) {
-            inputMillis.setText("0");
+        @Override
+        public int getCount() {
+            // Show 2 total pages.
+            return 2;
         }
 
-        if (inputDistancePenalty.getText().toString().isEmpty()) {
-            inputDistancePenalty.setText("0");
+        @Override
+        public CharSequence getPageTitle(int position) {
+            switch (position) {
+                case 0:
+                    return "Штрафы";
+                case 1:
+                    return "Время";
+            }
+            return null;
         }
-
-        if (penaltyCost.getText().toString().isEmpty()) {
-            penaltyCost.setText("0");
-        }
-
-        int penaltyTime = Integer.valueOf(inputDistancePenalty.getText().toString()) * Integer.valueOf(penaltyCost.getText().toString());
-        gregorianCalendar.set(gregorianCalendar.MINUTE, Integer.valueOf(inputMinutes.getText().toString()));
-        gregorianCalendar.set(gregorianCalendar.SECOND, Integer.valueOf(inputSeconds.getText().toString()));
-        gregorianCalendar.set(gregorianCalendar.MILLISECOND, Integer.valueOf(inputMillis.getText().toString()));
-
-        gregorianCalendar.add(gregorianCalendar.SECOND, penaltyTime);
-
-        timeWithPenalty.setText(gregorianCalendar.get(gregorianCalendar.MINUTE) + ":" + gregorianCalendar.get(gregorianCalendar.SECOND) + ":" + gregorianCalendar.get(gregorianCalendar.MILLISECOND));
-    }
-
-    public void clearFields(View v) {
-        inputMinutes.setText("");
-        inputSeconds.setText("");
-        inputMillis.setText("");
-        inputDistancePenalty.setText("");
-
     }
 }

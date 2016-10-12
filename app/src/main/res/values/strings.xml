@@ -4,4 +4,6 @@
     <string name="action_about">О программе</string>
     <string name="about_text">Программа для помощи в судействе соревнований по технике спортивного велосипедного туризма. Пересчитывает время дистанции с учетом штрафов</string>
     <string name="button_ok">OK</string>
+    <string name="title_activity_main2">MainActivity2</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

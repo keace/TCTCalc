@@ -7,8 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="ua.kyslytsia.tctcalc.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:context="ua.kyslytsia.tctcalc.MainActivity">
 
 
     <TextView
@@ -135,7 +134,6 @@
             android:text="Сбросить"
             android:id="@+id/buttonPenaltyClear"
             android:layout_gravity="center_horizontal"
-            android:onClick="clearFields"
             android:layout_weight="1" />
 
         <Button
@@ -144,7 +142,6 @@
             android:text="Посчитать"
             android:id="@+id/buttonPenaltyGetResultTime"
             android:layout_gravity="center_horizontal"
-            android:onClick="takeResult"
             android:focusable="true"
             android:layout_weight="5"/>
 
