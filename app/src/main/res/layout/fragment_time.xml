@@ -33,10 +33,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:text="@string/string_decimal"
+            android:text="@string/string_millis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.15"
             android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
@@ -68,14 +68,14 @@
             android:hint="@string/digit_0"
             android:gravity="center"
             android:focusable="true"
-            android:nextFocusDown="@+id/editTextTimeFirstDec" />
+            android:nextFocusDown="@+id/editTextTimeFirstMil" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:ems="10"
-            android:id="@+id/editTextTimeFirstDec"
+            android:id="@+id/editTextTimeFirstMil"
             android:layout_weight="1"
             android:hint="@string/digit_0"
             android:gravity="center"
@@ -113,10 +113,10 @@
             android:textStyle="bold" />
 
         <TextView
-            android:text="@string/string_decimal"
+            android:text="@string/string_millis"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="1.15"
             android:gravity="center"
             android:textStyle="bold" />
     </LinearLayout>
@@ -148,14 +148,14 @@
             android:hint="@string/digit_0"
             android:gravity="center"
             android:focusable="true"
-            android:nextFocusDown="@+id/editTextTimeSecondDec" />
+            android:nextFocusDown="@+id/editTextTimeSecondMil" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="numberSigned"
             android:ems="10"
-            android:id="@+id/editTextTimeSecondDec"
+            android:id="@+id/editTextTimeSecondMil"
             android:layout_weight="1"
             android:hint="@string/digit_0"
             android:gravity="center"

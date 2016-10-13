@@ -22,7 +22,7 @@ public class TimeFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final int FRAGMENT_TIME_ID = 1;
 
-    private EditText firstMin, firstSec, firstDec, secondMin, secondSec, secondDec;
+    private EditText firstMin, firstSec, firstMil, secondMin, secondSec, secondMil;
     private TextView resultTime;
 
     private static GregorianCalendar gregorianCalendar;
@@ -50,11 +50,11 @@ public class TimeFragment extends Fragment {
 
         firstMin = (EditText) rootView.findViewById(R.id.editTextTimeFirstMin);
         firstSec = (EditText) rootView.findViewById(R.id.editTextTimeFirstSec);
-        firstDec = (EditText) rootView.findViewById(R.id.editTextTimeFirstDec);
+        firstMil = (EditText) rootView.findViewById(R.id.editTextTimeFirstMil);
 
         secondMin = (EditText) rootView.findViewById(R.id.editTextTimeSecondMin);
         secondSec = (EditText) rootView.findViewById(R.id.editTextTimeSecondSec);
-        secondDec = (EditText) rootView.findViewById(R.id.editTextTimeSecondDec);
+        secondMil = (EditText) rootView.findViewById(R.id.editTextTimeSecondMil);
 
         resultTime = (TextView) rootView.findViewById(R.id.textViewTimeResult);
 
@@ -83,7 +83,6 @@ public class TimeFragment extends Fragment {
     }
 
     private void timeResult () {
-
         // If user not input some values set it to "0"
         if (firstMin.getText().toString().isEmpty()) {
             firstMin.setText("0");
@@ -91,8 +90,8 @@ public class TimeFragment extends Fragment {
         if (firstSec.getText().toString().isEmpty()) {
             firstSec.setText("0");
         }
-        if (firstDec.getText().toString().isEmpty()) {
-            firstDec.setText("0");
+        if (firstMil.getText().toString().isEmpty()) {
+            firstMil.setText("0");
         }
         if (secondMin.getText().toString().isEmpty()) {
             secondMin.setText("0");
@@ -100,18 +99,25 @@ public class TimeFragment extends Fragment {
         if (secondSec.getText().toString().isEmpty()) {
             secondSec.setText("0");
         }
-        if (secondDec.getText().toString().isEmpty()) {
-            secondDec.setText("0");
+        if (secondMil.getText().toString().isEmpty()) {
+            secondMil.setText("0");
         }
 
         // Calculate the result
         gregorianCalendar.set(Calendar.MINUTE, Integer.valueOf(firstMin.getText().toString()));
         gregorianCalendar.set(Calendar.SECOND, Integer.valueOf(firstSec.getText().toString()));
-        gregorianCalendar.set(Calendar.MILLISECOND, Integer.valueOf(firstDec.getText().toString()));
+        gregorianCalendar.set(Calendar.MILLISECOND, Integer.valueOf(firstMil.getText().toString()));
 
-        gregorianCalendar.add(Calendar.MILLISECOND, Integer.valueOf(secondDec.getText().toString()));
+        gregorianCalendar.add(Calendar.MILLISECOND, Integer.valueOf(secondMil.getText().toString()));
         gregorianCalendar.add(Calendar.SECOND, Integer.valueOf(secondSec.getText().toString()));
         gregorianCalendar.add(Calendar.MINUTE, Integer.valueOf(secondMin.getText().toString()));
+
+        if (gregorianCalendar.get(Calendar.MILLISECOND) > 99) {
+            int seconds = gregorianCalendar.get(Calendar.MILLISECOND) / 100;
+            int millis = gregorianCalendar.get(Calendar.MILLISECOND) % 100;
+            gregorianCalendar.add(Calendar.SECOND, seconds);
+            gregorianCalendar.set(Calendar.MILLISECOND, millis);
+        }
 
         sb.append(gregorianCalendar.get(Calendar.MINUTE)).append(":").append(gregorianCalendar.get(Calendar.SECOND)).append(":").append(gregorianCalendar.get(Calendar.MILLISECOND));
         resultTime.setText(sb.toString());
@@ -121,11 +127,11 @@ public class TimeFragment extends Fragment {
     private void timeCancel () {
         firstMin.setText("");
         firstSec.setText("");
-        firstDec.setText("");
+        firstMil.setText("");
 
         secondMin.setText("");
         secondSec.setText("");
-        secondDec.setText("");
+        secondMil.setText("");
 
         firstMin.requestFocus();
     }

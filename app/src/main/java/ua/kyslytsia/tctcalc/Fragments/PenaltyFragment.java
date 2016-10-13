@@ -107,6 +107,14 @@ public class PenaltyFragment extends Fragment {
         gregorianCalendar.set(Calendar.MINUTE, Integer.valueOf(inputMinutes.getText().toString()));
         gregorianCalendar.set(Calendar.SECOND, Integer.valueOf(inputSeconds.getText().toString()));
         gregorianCalendar.set(Calendar.MILLISECOND, Integer.valueOf(inputMillis.getText().toString()));
+
+        if (gregorianCalendar.get(Calendar.MILLISECOND) > 99) {
+                int seconds = gregorianCalendar.get(Calendar.MILLISECOND) / 100;
+                int millis = gregorianCalendar.get(Calendar.MILLISECOND) % 100;
+                gregorianCalendar.add(Calendar.SECOND, seconds);
+                gregorianCalendar.set(Calendar.MILLISECOND, millis);
+        }
+
         gregorianCalendar.add(Calendar.SECOND, penaltyTime);
 
         sb.append(gregorianCalendar.get(Calendar.MINUTE)).append(":").append(gregorianCalendar.get(Calendar.SECOND)).append(":").append(gregorianCalendar.get(Calendar.MILLISECOND));

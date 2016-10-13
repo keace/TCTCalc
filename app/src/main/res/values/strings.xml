@@ -1,8 +1,15 @@
 <resources>
-    <string name="app_name">ТСТ-Калькулятор</string>
+    <string name="app_name">TCT calc</string>
     <string name="action_settings">Настройки</string>
     <string name="action_about">О программе</string>
-    <string name="about_text">Калькулятор для помощи в судействе соревнований по технике спортивного туризма. Пересчитывает время дистанции с учетом штрафов и суммирует время\n\nВерсия 2.0\nСоздал Кислица Сергей</string>
+    <string name="about_text">
+        Калькулятор для помощи в судействе соревнований по технике спортивного туризма. Пересчитывает время дистанции с учетом штрафов и суммирует время участников комманды.\n\n
+        Версия 2.0.\n
+        Создал Кислица Сергей.\n\nИзменения версии 2.0:\n
+        -Добавлено суммирование времени;\n
+        -Вместо миллисекунд теперь сотые;\n
+        -По кнопке ВВОД курсор переходит на следующее значение (кроме цены штрафа);\n
+        -По кнопке СБРОС курсор переходит на первую позицию.</string>
     <string name="button_ok">OK</string>
 
     <string name="tab_penalty">Штрафы</string>
@@ -13,7 +20,7 @@
 
     <string name="string_minutes">Минуты</string>
     <string name="string_seconds">Секунды</string>
-    <string name="string_decimal">Десятые</string>
+    <string name="string_millis">Сотые</string>
 
     <string name="string_penalty_sec">Штраф = сек</string>
     <string name="string_sum_penalty">Сумма штрафов</string>
