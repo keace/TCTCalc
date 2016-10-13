@@ -1,9 +1,32 @@
 <resources>
-    <string name="app_name">TCTcalc</string>
-    <string name="action_settings">Settings</string>
+    <string name="app_name">ТСТ-Калькулятор</string>
+    <string name="action_settings">Настройки</string>
     <string name="action_about">О программе</string>
-    <string name="about_text">Программа для помощи в судействе соревнований по технике спортивного велосипедного туризма. Пересчитывает время дистанции с учетом штрафов</string>
+    <string name="about_text">Калькулятор для помощи в судействе соревнований по технике спортивного туризма. Пересчитывает время дистанции с учетом штрафов и суммирует время\n\nВерсия 2.0\nСоздал Кислица Сергей</string>
     <string name="button_ok">OK</string>
-    <string name="title_activity_main2">MainActivity2</string>
-    <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="tab_penalty">Штрафы</string>
+    <string name="tab_time">Время</string>
+
+    <string name="button_cancel">Сброс</string>
+    <string name="button_result">Посчитать</string>
+
+    <string name="string_minutes">Минуты</string>
+    <string name="string_seconds">Секунды</string>
+    <string name="string_decimal">Десятые</string>
+
+    <string name="string_penalty_sec">Штраф = сек</string>
+    <string name="string_sum_penalty">Сумма штрафов</string>
+
+    <string name="string_distance_time">Время дистанции</string>
+    <string name="string_first_member">Первый участник</string>
+    <string name="string_second_member">Второй участник</string>
+
+    <string name="string_result_penalty">Результат (время с учетом штрафов)</string>
+    <string name="string_result_time">Результат (время первого + время второго)</string>
+
+    <string name="field_result">&#8230;нажмите посчитать&#8230;</string>
+
+    <string name="digit_0">0</string>
+    <string name="digit_5">5</string>
 </resources>

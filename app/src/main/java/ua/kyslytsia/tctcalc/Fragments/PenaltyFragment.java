@@ -10,32 +10,33 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import ua.kyslytsia.tctcalc.R;
 
-public class FragmentPenalty extends Fragment {
+public class PenaltyFragment extends Fragment {
     /**
      * The fragment argument representing the section number for this fragment.
      */
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static final int FRAGMENT_PENALTY_ID = 0;
 
-    private static EditText inputMinutes, inputSeconds, inputMillis, inputDistancePenalty, penaltyCost;
+    private EditText inputMinutes, inputSeconds, inputMillis, inputDistancePenalty, penaltyCost;
+    private TextView timeWithPenalty;
+
     private static GregorianCalendar gregorianCalendar;
-    private static TextView timeWithPenalty;
+    private static StringBuffer sb;
 
-    private static Button buttonTakeResult, buttonClear;
-
-    public FragmentPenalty() {
+    public PenaltyFragment() {
     }
 
     /**
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static FragmentPenalty newInstance() {
-        FragmentPenalty fragment = new FragmentPenalty();
+    public static PenaltyFragment newInstance() {
+        PenaltyFragment fragment = new PenaltyFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_SECTION_NUMBER, FRAGMENT_PENALTY_ID);
         fragment.setArguments(args);
@@ -54,29 +55,31 @@ public class FragmentPenalty extends Fragment {
         penaltyCost = (EditText) rootView.findViewById(R.id.penaltyCost);
         timeWithPenalty = (TextView) rootView.findViewById(R.id.timeWithPenalty);
 
-        buttonTakeResult = (Button) rootView.findViewById(R.id.buttonPenaltyGetResultTime);
+        Button buttonTakeResult = (Button) rootView.findViewById(R.id.buttonPenaltyGetResultTime);
         buttonTakeResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takeResult(v);
+                takeResult();
             }
         });
 
-        buttonClear = (Button) rootView.findViewById(R.id.buttonPenaltyClear);
+        Button buttonClear = (Button) rootView.findViewById(R.id.buttonPenaltyClear);
         buttonClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                clearFields(v);
+                clearFields();
             }
         });
 
         gregorianCalendar = new GregorianCalendar();
         gregorianCalendar.clear();
 
+        sb = new StringBuffer();
+
         return rootView;
     }
 
-    public void takeResult (View v) {
+    private void takeResult () {
 
         // If user not input some values set it to "0"
         if (inputMinutes.getText().toString().isEmpty()) {
@@ -101,21 +104,21 @@ public class FragmentPenalty extends Fragment {
 
         // Calculate the result
         int penaltyTime = Integer.valueOf(inputDistancePenalty.getText().toString()) * Integer.valueOf(penaltyCost.getText().toString());
-        gregorianCalendar.set(gregorianCalendar.MINUTE, Integer.valueOf(inputMinutes.getText().toString()));
-        gregorianCalendar.set(gregorianCalendar.SECOND, Integer.valueOf(inputSeconds.getText().toString()));
-        gregorianCalendar.set(gregorianCalendar.MILLISECOND, Integer.valueOf(inputMillis.getText().toString()));
+        gregorianCalendar.set(Calendar.MINUTE, Integer.valueOf(inputMinutes.getText().toString()));
+        gregorianCalendar.set(Calendar.SECOND, Integer.valueOf(inputSeconds.getText().toString()));
+        gregorianCalendar.set(Calendar.MILLISECOND, Integer.valueOf(inputMillis.getText().toString()));
+        gregorianCalendar.add(Calendar.SECOND, penaltyTime);
 
-        gregorianCalendar.add(gregorianCalendar.SECOND, penaltyTime);
-
-        timeWithPenalty.setText(gregorianCalendar.get(gregorianCalendar.MINUTE) + ":" + gregorianCalendar.get(gregorianCalendar.SECOND) + ":" + gregorianCalendar.get(gregorianCalendar.MILLISECOND));
+        sb.append(gregorianCalendar.get(Calendar.MINUTE)).append(":").append(gregorianCalendar.get(Calendar.SECOND)).append(":").append(gregorianCalendar.get(Calendar.MILLISECOND));
+        timeWithPenalty.setText(sb.toString());
+        sb.delete(0, sb.length());
     }
 
-    public void clearFields(View v) {
+    private void clearFields() {
         inputMinutes.setText("");
         inputSeconds.setText("");
         inputMillis.setText("");
         inputDistancePenalty.setText("");
-
+        inputMinutes.requestFocus();
     }
-
 }

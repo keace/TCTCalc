@@ -2,7 +2,6 @@ package ua.kyslytsia.tctcalc;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,17 +10,13 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import ua.kyslytsia.tctcalc.Fragments.FragmentPenalty;
-import ua.kyslytsia.tctcalc.Fragments.FragmentTime;
+import ua.kyslytsia.tctcalc.Fragments.PenaltyFragment;
+import ua.kyslytsia.tctcalc.Fragments.TimeFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    private SectionsPagerAdapter mSectionsPagerAdapter;
-    private ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,35 +25,14 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = (ViewPager) findViewById(R.id.container);
-        mViewPager.setAdapter(mSectionsPagerAdapter);
+        ViewPager viewPager = (ViewPager) findViewById(R.id.container);
+        viewPager.setAdapter(sectionsPagerAdapter);
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
-                dialog.setTitle(R.string.action_about)
-                        .setMessage(R.string.about_text)
-                        .setCancelable(true)
-                        .setNegativeButton(R.string.button_ok, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.cancel();
-                            }
-                        });
-                AlertDialog alert = dialog.create();
-                alert.show();
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-            }
-        });
+        tabLayout.setupWithViewPager(viewPager);
     }
 
     @Override
@@ -96,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        public SectionsPagerAdapter(FragmentManager fm) {
+        SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
@@ -106,10 +80,10 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
                 case 0: {
-                    return FragmentPenalty.newInstance();
+                    return PenaltyFragment.newInstance();
                 }
                 case 1: {
-                    return FragmentTime.newInstance();
+                    return TimeFragment.newInstance();
                 }
 
             }
@@ -126,9 +100,9 @@ public class MainActivity extends AppCompatActivity {
         public CharSequence getPageTitle(int position) {
             switch (position) {
                 case 0:
-                    return "Штрафы";
+                    return getResources().getString(R.string.tab_penalty);
                 case 1:
-                    return "Время";
+                    return getResources().getString(R.string.tab_time);
             }
             return null;
         }

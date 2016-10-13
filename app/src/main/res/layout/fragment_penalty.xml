@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Время дистанции"
+        android:text="@string/string_distance_time"
         android:id="@+id/textViewInputTime"
         android:layout_gravity="center_horizontal" />
 
@@ -25,26 +25,29 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Минуты"
+            android:text="@string/string_minutes"
             android:id="@+id/textViewInputMinutes"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Секунды"
+            android:text="@string/string_seconds"
             android:id="@+id/textViewInputSeconds"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="МиллиС"
+            android:text="@string/string_decimal"
             android:id="@+id/textViewInputMillis"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -60,7 +63,7 @@
             android:id="@+id/inputMinutes"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="0"
+            android:hint="@string/digit_0"
             android:focusable="true"
             android:nextFocusDown="@+id/inputSeconds"/>
 
@@ -71,9 +74,9 @@
             android:id="@+id/inputSeconds"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="0"
+            android:hint="@string/digit_0"
             android:focusable="true"
-            android:nextFocusDown="@+id/inputDistancePenalty"/>
+            android:nextFocusDown="@+id/inputMillis"/>
 
         <EditText
             android:layout_width="wrap_content"
@@ -82,46 +85,62 @@
             android:id="@+id/inputMillis"
             android:layout_weight="1"
             android:gravity="center"
-            android:hint="0"
+            android:hint="@string/digit_0"
             android:focusable="true"
+            android:nextFocusDown="@+id/inputDistancePenalty"
             />
     </LinearLayout>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Сумма штрафов"
-        android:id="@+id/textViewDistancePenalty"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/inputDistancePenalty"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:hint="0"
-        android:focusable="true"
-        android:nextFocusDown="@+id/buttonPenaltyGetResultTime"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_penalty_sec"
+            android:id="@+id/textViewPenaltyCost"
+            android:gravity="center"
+            android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Стоимость штрафа, секунд"
-        android:id="@+id/textViewPenaltyCost"
-        android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_sum_penalty"
+            android:id="@+id/textViewDistancePenalty"
+            android:gravity="center"
+            android:layout_weight="5"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="numberSigned"
-        android:ems="10"
-        android:id="@+id/penaltyCost"
-        android:layout_gravity="center_horizontal"
-        android:text="5"
-        android:gravity="center"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:id="@+id/penaltyCost"
+            android:layout_weight="2"
+            android:gravity="center"
+            android:text="@string/digit_5"
+            android:focusable="true"
+            />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="numberSigned"
+            android:id="@+id/inputDistancePenalty"
+            android:layout_weight="5"
+            android:gravity="center"
+            android:hint="@string/digit_0"
+            android:focusable="true"
+            android:nextFocusDown="@+id/buttonPenaltyGetResultTime"/>
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -131,34 +150,34 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Сбросить"
+            android:text="@string/button_cancel"
             android:id="@+id/buttonPenaltyClear"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="?attr/buttonBarNegativeButtonStyle" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Посчитать"
+            android:text="@string/button_result"
             android:id="@+id/buttonPenaltyGetResultTime"
             android:layout_gravity="center_horizontal"
             android:focusable="true"
-            android:layout_weight="5"/>
-
+            android:layout_weight="5"
+            style="?attr/buttonBarPositiveButtonStyle"/>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Результат (время с учтом штрафов)"
+        android:text="@string/string_result_penalty"
         android:id="@+id/textViewResultTime"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="20dp" />
+        android:layout_gravity="center_horizontal" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="...нажмите посчитать..."
+        android:text="@string/field_result"
         android:id="@+id/timeWithPenalty"
         android:layout_gravity="center_horizontal"
         android:textAppearance="?android:textAppearanceLarge"/>
